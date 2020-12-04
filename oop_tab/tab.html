@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./iconfont/iconfont.css">
+  <link rel="stylesheet" href="./style/tab.css">
+</head>
+<body>
+  <!-- JS 面向对象 动态添加标签页 -->
+  <!-- 1. 点击tab栏切换 -->
+  <!-- 2. 点击+ 可添加tab项及内容项 -->
+  <!-- 3. 点击x 可删除tab项及内容项 -->
+  <!-- 4. 双击tab栏或内容文字 可以修改 -->
+  <h4>tab</h4>
+  <div class="tabsbox" id="tab">
+    <!-- tab标签 -->
+    <nav class="firstnav">
+      <!-- <nav> 标签定义导航链接的部分。 -->
+      <ul>
+        <li class="liactive"><span>测试1</span><span class="iconfont icon-guanbi"></span></li>
+        <li><span>测试2</span><span class="iconfont icon-guanbi"></span></li>
+        <li><span>测试3</span><span class="iconfont icon-guanbi"></span></li>
+      </ul>
+      <div class="tabadd">
+        <span>+</span>
+      </div>
+    </nav>
+
+    <!-- tab 内容 -->
+    <div class="tabscon">
+      <!-- <section> 标签定义文档中的节（section、区段）。比如章节、页眉、页脚或文档中的其他部分。 -->
+      <section class="conactive">测试1</section>
+      <section>测试2</section>
+      <section>测试3</section>
+    </div>
+  </div>
+  <script src="./js/tab.js"></script>
+</body>
+</html>
