@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>查找商品案例</title>
+</head>
+<body>
+    <div>
+        按照价格查询：<input type="text" style="width: 50px;"> - <input type="text" style="width: 50px;">
+        <button>搜索</button>
+        按照商品名称查询：<input type="text" style="width: 50px;">
+        <button>查询</button>
+    </div>
+    <table border="1" cellspacing="0" align="center">
+        <thead>
+            <th style="width: 80px;">id</td>
+            <th style="width: 150px;">产品名称</td>
+            <th style="width: 80px;">价格</td>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <script>
+        var list = [{
+            id: 1,
+            name: '苹果',
+            price: 5499
+        }, {
+            id: 2,
+            name: '小米',
+            price: 4599
+        }, {
+            id: 3,
+            name: '华为',
+            price: 5399
+        }, {
+            id: 4,
+            name: '三星',
+            price: 5899
+        }]
+
+        var tbody = document.querySelector('tbody')
+        showData(list)
+        console.log(tbody);
+
+        // 渲染数据
+        function showData (data) {
+            tbody.innerHTML = ''
+            // 方法一
+            // var table = document.getElementsByTagName('table')[0]
+            // list.forEach(function (val) {
+            //     table.insertAdjacentHTML("beforeEnd", '<tr><td>'+val.id+'</td><td>'+val.name+'</td><td>'+val.price+'</td></tr>')
+            // })
+
+            // 方法二
+            data.forEach(function(val) {
+                var tr = document.createElement('tr')
+                tr.innerHTML = '<td>'+val.id+'</td><td>'+val.name+'</td><td>'+val.price+'</td>'
+                tbody.appendChild(tr)
+            })
+        }
+        
+
+        // 根据价格筛选
+        var inputs = document.querySelectorAll('input')
+        var btns = document.querySelectorAll('button')
+        btns[0].onclick = function () {
+            var newList = list.filter(function (val) {
+                return val.price >= inputs[0].value && val.price <= inputs[1].value
+            })
+            showData(newList)
+        }
+
+        // 按名称筛选 (也可以用filter, 但是使用some效率更高)
+        btns[btns.length-1].addEventListener('click', function () {
+            var exitList = []
+            var flag = list.some(function (val, index) {
+                if (val.name == inputs[inputs.length -1].value) {
+                    exitList.push(val)
+                    // 一定要return true 这样才表示找到了符合条件的元素 才会终止循环
+                    return true
+                } else {
+                    tbody.innerHTML = ''
+                }
+            })
+            showData(exitList)
+        })
+    </script>
+    <style>
+        div {
+            width: 600px;
+            margin: 0 auto;
+        }
+        button {
+            margin-bottom: 20px;
+        }
+        table {
+            width: auto;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</body>
+</html>
