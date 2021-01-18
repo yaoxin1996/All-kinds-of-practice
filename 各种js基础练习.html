@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 1~100总和及平均值
+        // var sum = 0
+        // for (var i=1; i <= 100; i++) {
+        //     sum += i
+        // }
+        // console.log(sum, sum/100)
+
+        // 1~100所有偶数的和
+        // var sum = 0
+        // for (var i=1; i<= 100; i++) {
+        //     if (i % 2 == 0) {
+        //         sum += i
+        //     }
+        // }
+        // console.log(sum)
+
+        // 100以内7的倍数的和
+        // var sum = 0
+        // for (var i=1; i<= 100; i++) {
+        //     if (i % 7 == 0) {
+        //         sum += i
+        //     }
+        // }
+        // console.log(sum)
+
+        // 4*5矩形
+        // var str = ''
+        // for (var i=0; i< 4; i++) {
+        //     for (var j = 0; j < 5; j++) {
+        //         str += '☆'
+        //     }
+        //     str += '\n'
+        // }
+        // console.log(str)
+
+        // 5行三角形
+        // var str = ''
+        // for (var i=1; i<=5; i++) {
+        //     for (var j = 1; j <= i; j++ ) {
+        //         str += '☆'
+        //     }
+        //     str += '\n'
+        // }
+        // console.log(str)
+
+        // 99乘法表
+        // var str = ''
+        // for (var i = 1; i <= 9; i++) {
+        //     for (var j = 1; j <= i; j++){
+        //         str += j  + '*' + i + '=' + j*i + ' '
+        //     }
+        //     str += '\n'
+        // }
+        // console.log(str)
+
+        // 输入用户名和密码 如果名为admin 密码为123456 跳出 否则一直输入
+        // do {
+        //     var user = prompt('用户名')
+        //     var pwd = prompt('密码')
+        // } while (user !== 'admin' && pwd !== 123456) 
+        // alert('登录成功')
+
+        // 1~100累加值 个位是3的跳过
+        // var sum = 0
+        // for (var i = 1; i <= 100; i++) {
+        //     if (String(i)[String(i).length - 1] == 3) {
+        //         continue
+        //     }
+        //     sum += i
+        // }
+        // console.log(sum)
+
+        
+        // var sum = 100
+        // do {
+        //     var type = Number(prompt('1存钱\n2取钱\n3显示余额\n4退出'))
+        //     switch (type) {
+        //         case 1:
+        //             var money = prompt('金额')
+        //             sum += parseFloat(money)
+        //             alert(sum)
+        //             break
+        //         case 2:
+        //             var money = prompt('金额')
+        //             sum -= money
+        //             alert(sum)
+        //             break
+        //         case 3:
+        //             alert(sum)
+        //             break
+        //     }
+        // } while (type !== 4)
+        // alert('退出')
+
+        // var arr = [2, 6, 1, 7, 4]
+        // var sum = 0
+        // for (var i = 0; i < arr.length; i++) {
+        //     sum += arr[i]
+        // }
+        // var avg = sum / arr.length
+        // console.log(sum, avg)
+
+        // 取最大值
+        // var arr = [2, 6, 1, 77, 52, 25, 7]
+        // var max = arr[0]
+        // for (var i = 0; i < arr.length; i++) {
+        //     if (max < arr[i+1]) {
+        //         max = arr[i+1]
+        //     }
+        // }
+        // console.log(max)
+
+        // 数组转化为字符串
+        // var arr = ['red', 'blue', 'pink', 'green']
+        // var str = ''
+        // for (var i = 0; i < arr.length; i++) {
+        //     str += arr[i] + '|'
+        // }
+        // console.log(str)
+
+        // 新建数组 存放1-10
+        // var arr = []
+        // for (var i = 0; i <=9; i++) {
+        //     arr[i] = i+1
+        // }
+        // console.log(arr)
+
+        // 筛选数组
+        // var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7]
+        // var arr1 = []
+        // for (var i = 0; i < arr.length; i++) {
+        //     if (arr[i] >= 10) {
+        //         arr1[arr1.length] = arr[i]
+        //     }
+        // }
+        // console.log(arr1)
+
+        // 删除0 形成一个新数组
+        // var arr = [2, 0, 6, 1, 77, 0, 52, 0, 25, 7]
+        // var arr1 = []
+        // for (var i = 0; i < arr.length; i++) {
+        //     if (arr[i] != 0) {
+        //         arr1[arr1.length] = arr[i]
+        //     }
+        // }
+        // console.log(arr1)
+
+        // 翻转数组
+        // var arr = ['red', 'blue', 'pink', 'green']
+        // var arr1 = []
+        // for (var i = 0; i < arr.length; i++) {
+        //     arr1[arr1.length] = arr[arr.length - i -1]
+        // }
+        // console.log(arr1)
+
+        // 交换两个变量的位置
+        // var num = 5
+        // var num1 = 8
+        // var a = num
+        // num = num1
+        // num1 = a
+        // console.log(num, num1)
+
+        // 冒泡排序
+        // var arr = [5, 4, 3, 2, 1]
+        // var num
+        // for (var i = 0; i <= arr.length-1; i++) {  //外层循环是趟数
+        //     for (var j = 0; j <= arr.length - i - 1; j++) {  // 里层循环是交换次数 （递减）
+        //         // 内部交换两个变量的值
+        //         if (arr[j] > arr[j+1]) {
+        //             var temp = arr[j]
+        //             arr[j] = arr[j+1]
+        //             arr[j+1] = temp
+        //         }
+        //     }
+        // }
+        // console.log(arr)
+
+        // 1-100累加和
+        function getSum () {
+            var sum = 0
+            for (var i = 1; i <=100; i++) {
+                sum += i
+            }
+            console.log(sum);
+        }
+        // getSum()
+
+        // 求任意两个数之和
+        function getTwo (num1, num2) {
+            var sum = 0
+            sum = num1 + num2
+            console.log(sum)
+        }
+        // getTwo(50, 80)
+
+        // 任意两个数之间的和
+        function getAny (num1, num2) {
+            var sum = 0
+            for (var i = num1; i < num2; i++) {
+                sum += i
+            }
+            return sum
+        }
+        // console.log(getAny(2, 5))
+
+        // 求两个数的最大值
+        function getMax (num1, num2) {
+            if (num1 > num2) {
+                return num1
+            } else {
+                return num2
+            }
+        }
+        // console.log(getMax(50, 51));
+
+        // 求数组中的最大值
+        function getArrMax (arr) {
+            var max = arr[0]
+            for (var i = 0; i< arr.length; i++) {
+                if (max < arr[i]) {
+                    max = arr[i]
+                }
+            }
+            return max
+        }
+        // console.log(getArrMax([1, 2, 3, 4, 5]));
+
+        // 简单计算器 弹出结果
+        function calc () {
+            var a = parseFloat(prompt('输入第一个数'))
+            var b = prompt('计算方式')
+            var c = parseFloat(prompt('输入另一个数'))
+            console.log(a,b,c)
+            if (b == '+') {
+                alert(a+c)
+            } else if (b == '-') {
+                alert(a-c)
+            } else if (b == '*') {
+                alert(a*c)
+            } else {
+                alert(a/c)
+            }
+        }
+        // calc()
+
+        // 返回两个数的最大值
+        function getNumMax (num1, num2) {
+            var num1 = prompt('第一个')
+            var num2 = prompt('第二个')
+            if (parseFloat(num1) > parseFloat(num2)) {
+                alert(num1)
+            } else {
+                alert(num2)
+            }
+        }
+        // getNumMax()
+
+        // 是否为素数
+        function isSuShu () {
+            var num = parseFloat(prompt('输入一个数'))
+            if (num == 1) {
+                alert('不是')
+            }
+            if (num == 2) {
+                alert('是')
+            }
+            var result = ''
+            for (var i = 2; i < num; i++) {
+                if (num % i == 0) {
+                    result = '不是'
+                    break
+                } else {
+                    result = '是'
+                }
+            }
+            alert(result)
+        }
+        // isSuShu()
+
+        // 求任意个数的最大值
+        function getOne () {
+            var num = 0
+            for (var i = 0; i < arguments.length; i++) {
+                if (arguments[i] < arguments[i+1]) {
+                    num = arguments[i+1]
+                }
+            }
+            return num
+        }
+        // console.log(getOne(5,15,3, 30, 100, 6))
+
+        // 翻转数组
+        function reveres (arr) {
+            var newArr = []
+            for (var i = 0; i < arr.length; i++) {
+                newArr[i] = arr[arr.length - i -1]
+            }
+            return newArr
+        }
+        // console.log(reveres(['你', '迎', '欢', '京', '北']))
+
+        // 数组排序
+        function sort (arr) {
+            var a = 0
+            for (var i = 0; i < arr.length - 1; i++) {
+                for (var j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] < arr[j+1]) {
+                        a = arr[j]
+                        arr[j] = arr[j+1]
+                        arr[j+1] = a
+                    }
+                }
+            }
+            return arr
+        }
+        // console.log(sort([5,1,3,2,4]))
+
+        // 判断闰年
+        function isYear () {
+            var year = parseFloat(prompt('年份'))
+            if (year % 4 == 0 && year % 100 != 0 || year % 400 == 0) {
+                alert('2月有29天')
+            } else {
+                alert('2月有28天')
+            }
+        }
+        // isYear()
+
+        // 构造函数
+        function hero (name, type, blood, attack) {
+            this.name = name
+            this.type = type
+            this.blood = blood
+            this.attack = attack
+        }
+        var one = new hero('廉颇', '力量型', '500血量', '攻击：近战')
+        var two = new hero('后羿', '射手型', '100血量', '攻击：远程')
+        // console.log(one.name, two)
+
+        // 封装内置对象
+        var obj = {
+            pI: 3.1415926,
+            max: function () {
+                var max = arguments[0]
+                for (var i = 0; i < arguments.length; i++) {
+                    if (arguments[i+1] > max) {
+                      max = arguments[i+1]  
+                    }
+                }
+                return max
+            },
+            min: function () {
+                var min = arguments[0]
+                for (var i = 0; i < arguments.length; i++) {
+                    if (arguments[i+1] < min) {
+                      min = arguments[i+1]  
+                    }
+                }
+                return min
+            }
+        }
+        // console.log(obj.pI)
+        // console.log(obj.max(5, 20, 10))
+        // console.log(obj.min(-1, -5, -2))
+
+        // 猜数字
+        function guessNumber () {
+            var num = Math.floor(Math.random() * 10) + 1
+            do {
+                var insert = parseInt(prompt('输入数字'))
+                if (num > insert) {
+                    alert('小了')
+                }
+                if (num < insert) {
+                    alert('大了')
+                }
+            } while (num != insert)
+            alert('答对了')
+        }
+        guessNumber()
+    </script>
+
+</head>
+<body>
+</body>
+</html>

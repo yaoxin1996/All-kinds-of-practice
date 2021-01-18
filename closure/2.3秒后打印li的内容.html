@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3秒钟后打印li的内容</title>
+</head>
+<body>
+    <ul>
+        <li>榴莲</li>
+        <li>橙子</li>
+        <li>草莓</li>
+        <li>苹果</li>
+    </ul>
+    <script>
+        var lis = document.querySelectorAll('li')
+        for (var i = 0; i < lis.length; i++) {
+            (function (i) {
+                setTimeout(function () {
+                    console.log(lis[i].innerHTML)
+                }, 3000)
+            })(i)
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算打车价格</title>
+</head>
+<body>
+    <script>
+        // 打车起步价13（3公里内），每多加1公里，加5元，
+        // 输入公里数计算打车价格
+        // 如果有拥堵情况，总价格多收取10元拥堵费
+
+        var car = (function () {
+            var start = 13  // 起步价
+            var total = 0  // 总价
+            return {
+                // 正常情况下费用
+                price: function (n) {
+                    if (n <= 3) {
+                        total = 13
+                    } else {
+                        total = (n-3) * 5 + start
+                    }
+                    return total
+                },
+                // 拥堵后的费用
+                crowd: function (flag) {
+                    return flag ? total + 10 : total
+                }
+            }
+        })()
+        console.log(car.price(5));
+        console.log(car.crowd(true));
+        console.log(car.price(1));
+        console.log(car.crowd(false));
+    </script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p></p>
+
+    <script>
+        function countDown (time) {
+            var nowTime = +new Date()  // 返回当前时间总的毫秒数
+            var inputTime = +new Date(time)  // 返回用户输入时间总的毫秒数
+            var times = (inputTime - nowTime) / 1000   // 剩余时间总的秒数
+            var d = parseInt(times / 60 / 60 / 24)
+            d = d < 10 ? '0' + d : d
+            var h = parseInt(times / 60 / 60 % 24)
+            h = h < 10 ? '0' + h : h
+            var m = parseInt(times / 60 % 60)
+            m = m < 10 ? '0' + m : m
+            var s = parseInt(times % 60)
+            s = s < 10 ? '0' + s : s
+            return d + '天' + h + ':' + m + ':' + s
+
+        }
+        // console.log(countDown('2020-9-24 08:00:00'))
+
+        // 数组去重
+        function unique (arr) {
+            var newArr = []
+            for (var i = 0; i < arr.length; i++) {
+                if (newArr.indexOf(arr[i]) == -1) {
+                    newArr.push(arr[i])
+                }
+            }
+            return newArr
+        }
+        // console.log(unique(['c', 'a', 'z', 'a', 'x', 'a', 'x', 'c', 'b']));
+
+        // 返回字符位置
+        var str = 'abcoefoxyozzopp'
+        var num = 0
+        var index = str.indexOf('o')
+        while (index !== -1) {
+            // console.log(index);
+            num ++
+            index = str.indexOf('o', index+1)
+        }
+        // console.log(num);
+
+        function findColor (arr) {
+            var index = arr.indexOf('red')
+            var num = 0
+            while (index != -1) {
+                console.log(index);
+                index = arr.indexOf('red', index +1)
+                num++
+            }
+            return num
+        }
+
+        // var num = findColor(['red', 'blue', 'red', 'green', 'pink', 'red'])
+        // console.log(num)
+
+        // 判断出现次数最多字符，并统计次数
+        var str = 'abcoefoxyozzopp'
+        var obj = {}
+        for (var i = 0; i < str.length; i++) {
+            var chars = str.charAt(i)
+            if (obj[chars]) {
+                obj[chars]++
+            } else {
+                obj[chars] = 1
+            }
+        }
+        // console.log(obj)
+        var max = 0
+        var ch = ''
+        for (var k in obj) {
+            if (obj[k] > max) {
+                max = obj[k]
+                ch = k
+            }
+        }
+        // console.log(max, ch)
+
+        var str = 'aobocioeoco'
+        function replaceEle (str) {
+            for (var i = 0; i < str.length; i++) {
+                if (str[i] == 'o'){
+                    str = str.replace('o','&')
+                }
+                console.log(str);
+            }
+        }
+        // while (str.indexOf('o') !== -1) {
+        //     str.replace('o', '*')
+        // }
+        console.log(replaceEle('aobocioeoco'))
+    </script>
+</body>
+</html>

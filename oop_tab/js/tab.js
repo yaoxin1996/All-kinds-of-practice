@@ -1,7 +1,7 @@
-var that
+// var that
 class tab {
   constructor (id) {
-    that = this
+    // that = this
     // 获取元素
     this.main = document.querySelector(id)
     this.add = this.main.querySelector('.tabadd')
@@ -14,12 +14,13 @@ class tab {
   // 初始化
   init () {
     this.updateNode()
-    this.add.onclick = this.addTab
+    this.add.onclick = this.addTab.bind(this.add, this)
     for (var i = 0; i < this.lis.length; i++) {
       this.lis[i].index = i
       // 方法后面不加括号 (加括号会立即执行，当前是click之后才执行)
-      this.lis[i].onclick = this.toggleTab
-      this.remove[i].onclick = this.delTab
+      // bind 方法 第一个参数指 不改变原来this的指向， 第二个参数修改this指向
+      this.lis[i].onclick = this.toggleTab.bind(this.lis[i], this)
+      this.remove[i].onclick = this.delTab.bind(this.remove[i], this)
       this.spans[i].ondblclick = this.editTab
       this.section[i].ondblclick = this.editTab
     }
@@ -32,13 +33,13 @@ class tab {
     this.spans = this.main.querySelectorAll('.firstnav span:first-child')
   }
   // 切换
-  toggleTab () {
+  toggleTab (that) {
     that.clearClass()
-    that.lis[this.index].className = 'liactive'
+    this.className = 'liactive'
     that.section[this.index].className = 'conactive'
   }
   // 添加
-  addTab () {
+  addTab (that) {
     that.clearClass()
     var random = Math.random()
     // 先创建新元素
@@ -51,7 +52,7 @@ class tab {
     that.init()
   }
   // 删除
-  delTab (e) {
+  delTab (that, e) {
     e.stopPropagation()  // 阻止冒泡 即 点击关闭图标时触发li上的点击事件
     var index = this.parentNode.index  // 获取父元素的索引值
     // remove 可以直接移除元素
