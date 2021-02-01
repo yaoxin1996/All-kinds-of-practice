@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>利用递归进行深拷贝</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            id: 1,
+            name: '罗飞',
+            msg: {
+                age: 18
+            },
+            friend: [
+                '王子麒',
+                '王剑'
+            ]
+        }
+
+        var o = {}
+        // instanceof 运算符用于检测构造函数的 prototype 属性是否出现在某个实例对象的原型链上。
+        function deepCopy (newObj, oldObj) {
+            for (var k in oldObj) {
+                // 判断属性值属于哪种数据类型
+                // 1. 获取属性值
+                var item = oldObj[k]
+                // 2. 判断是否为数组
+                // 数组也属于object，如果先判断是否为object，会把数组当对象解析，就不会再判断array了
+                if (item instanceof Array) {
+                    newObj[k] = []
+                    deepCopy(newObj[k], item)
+                } else if (item instanceof Object) {
+                    // 3. 判断是否为对象
+                    newObj[k] = {}
+                    deepCopy(newObj[k], item)
+                } else {
+                    // 4. 判断是否为普通数据类型
+                    newObj[k] = item
+                }
+            }
+        }
+        deepCopy(o, obj)
+        console.log(o);
+        o.msg.age = 24
+        console.log(obj);
+    </script>
+</body>
+</html>

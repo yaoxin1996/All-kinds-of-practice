@@ -1,0 +1,24 @@
+@font-face {font-family: "iconfont";
+  src: url('//at.alicdn.com/t/font_2345401_n117jyw0y4.eot?t=1611396320543'); /* IE9 */
+  src: url('//at.alicdn.com/t/font_2345401_n117jyw0y4.eot?t=1611396320543#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAANEAAsAAAAAB1wAAAL2AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDBgqCNIIRATYCJAMMCwgABCAFhG0HRRtmBhEVlNlkX2DbsKfMDSfyyb5bmJxdJ7gA4PMgBTNQAAAAAEA8RGuvb3bnLggOSiQrgT0gu9YFVFSBlamtMYAaWMg/z/7yK52YlC4xs0ERYLpKVmhsUNpKEhz3tjk1Y9MCIkA61qKTO4mc5XWy0v4HADjkVA8gN2iRBpzPczm9UeLzW5bLWNPGWHjUC6w4oID2xjZZBxKQN4zdRPAALxPoNY0L3HXR6YFuCcwKxI0y5AG6CyEpnWy30DZszIiHGt1lsawQHnD247dBdFM0FVi455LcD2z7JryTwbOdWScoQbmcD842KjYAJHGqMXBElakNYL2RLuNmQCuFslT0v8MVsak96B+vEC1Q2Q/W6OnCtx4WE3zbbFFABa2WOYBFnZtPrmr/OKq/fzT59ubA7u3B/fvDe3cn9K3GTJ5uOtTJzzapgWe5qQbN9mJplNLUsTxGH/Sse3t7h/b3D+/uHtzZOaU3dhpTOarhWZPuezFO67xmw7Ofks1GPkHbEjbRZMP2hYNXM+zgTF8NQAnDMJWblrEfk//ud9+uxl8j3VNjBzeHS9nYhVeL8OPPugilVEY02dn9ovPtM76/VeOcF31d9Qx9v1n7fxcAxsA/2b2Uaxd+0293X4KvA+oFn9KZTaDOovv+gsH/NmSxJWMz05ihQWdloFp374mCXujkL9fCqLPpponBlYRuExmKLlOouq0gk7sBjT4b0eq2Fb3WU27vMyahiuzBOmUNYdgiikFvUA1bJZN7isakV7SGo6LXoRg7sM+qEJRyJ6FizCD5hzL1TiM3S1H9wLwxivJqzvsgxTIK/U6vnL2iQ1piSfzmA2YNmryFi3YdGuMhkK8w5U7BHBbdrm76UCf1Vkg7CRVjBsk/lKl3mnZnWfn+A/PGKOpgjCQ/SLHsH/qd3gDyanCDGI9yS/zmA2YNmryFizYOjfEQmsdVmHKnmJAIiy5sp4caOtub7P/tgV7g2BolaqTmfON/TWvaO6hYpvc3GBHbypj2cCoEAAA=') format('woff2'),
+  url('//at.alicdn.com/t/font_2345401_n117jyw0y4.woff?t=1611396320543') format('woff'),
+  url('//at.alicdn.com/t/font_2345401_n117jyw0y4.ttf?t=1611396320543') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('//at.alicdn.com/t/font_2345401_n117jyw0y4.svg?t=1611396320543#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cuowu:before {
+  content: "\e630";
+}
+
+.icon-70BasicIcons-all-37:before {
+  content: "\e63e";
+}

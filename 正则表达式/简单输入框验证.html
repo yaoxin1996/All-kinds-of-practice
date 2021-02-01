@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简单输入框验证</title>
+</head>
+<body>
+    <!-- 如果用户名输入合法，后面提示信息为：用户名合法，且为绿色 -->
+    <!-- 如果用户名输入不合法，后面提示信息为：用户名不合法，且为红色 -->
+    <input type="text">
+    <span>请输入用户名</span>
+
+    <script>
+        var input = document.querySelector('input')
+        var span = document.querySelector('span')
+        input.onblur = function () {
+            var val = this.value
+            var reg = /^[a-zA-Z0-9_-]{6,16}$/
+            if (val.trim() != '') {
+                if (reg.test(val)) {
+                    span.className = 'success'
+                    span.innerHTML = '用户名格式输入正确'
+                } else {
+                    span.className = 'error'
+                    span.innerHTML = '用户名格式输入不正确'
+                }
+            } else {
+                span.className = ''
+                span.innerHTML = '请输入用户名'
+            }
+        }
+    </script>
+
+    <style>
+        span {
+            color: #999;
+            font-size: 16px;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</body>
+</html>

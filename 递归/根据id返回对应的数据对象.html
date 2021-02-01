@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>根据id返回对应的数据对象</title>
+</head>
+<body>
+    <script>
+        var data = [{
+            id: 1,
+            name: '家电',
+            goods: [{
+                id: 3,
+                name: '洗衣机',
+                goods: [{
+                    id: 6,
+                    name: '海尔'
+                }, {
+                    id: 7,
+                    name: '美的'
+                }]
+            }, {
+                id: 4,
+                name: '电视'
+            }, {
+                id: 5,
+                name: '空调'
+            }]
+        }, {
+            id: 2,
+            name: '服装'
+        }]
+
+        // 输入id返回对应数据对象
+        // 利用foreach遍历每个对象
+        function getId (data, id) {
+            var o = {}
+            data.forEach(item => {
+                if (item.id == id) {
+                    // console.log(item);
+                    o = item
+                // 判断对象中是否有goods数组且数组长度大于0
+                } else if (item.goods && item.goods.length > 0) {
+                    o = getId(item.goods, id)
+                }
+            });
+            return o
+        }
+        console.log(getId(data, 5));
+        console.log(getId(data, 7));
+    </script>
+</body>
+</html>
