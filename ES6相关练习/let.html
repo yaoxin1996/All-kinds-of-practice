@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h2>点击切换颜色</h2>
+        <hr>
+        <div class="item"></div>
+        <div class="item"></div>
+        <div class="item"></div>
+    </div>
+
+    <script>
+        var items = document.querySelectorAll('.item')
+
+        // 方法一
+        for (var i = 0; i < items.length; i++) {
+            items[i].onclick = function () {
+                // 使用 items[i]
+                // items[i].style.background = 'pink'  // 报错，此时 i = 3 
+                // 使用this
+                this.style.background = 'pink'
+            }
+        }
+
+        // 方法二
+        // 使用let声明变量，每次循环产生一个块级作用域，每个i互不影响
+        for (let i = 0; i < items.length; i++) {
+            items[i].onclick = function () {
+                items[i].style.background = 'pink'
+            }
+        }
+
+        
+    </script>
+
+    <style>
+        h2 {
+            font-weight: normal;
+        }
+        .item {
+            display: inline-block;
+            width: 80px;
+            height: 40px;
+            border: 1px solid #f2f2f2;
+        }
+    </style>
+</body>
+</html>

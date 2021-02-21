@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+
+    <script>
+        // 需求-1 点击 div 2s 后变 粉色
+        var div = document.getElementsByTagName('div')
+        div[0].onclick = function () {
+            setTimeout(() => {
+                console.log(this);
+                this.style.background = 'pink'
+            }, 2000);
+        }
+        // 需求-2 从数组中返回偶数元素
+        const arr = [1, 6, 2, 9, 8, 10]
+        // 方法一
+        // const result = arr.filter(function (item) {
+        //     if (item % 2 == 0) {
+        //         return true
+        //     } else {
+        //         return false
+        //     }
+        // })
+
+        // 方法二
+        const result = arr.filter((item) => item % 2 == 0)
+        console.log(result);
+    </script>
+
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: burlywood;
+        }
+    </style>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 接口地址 https://api.apiopen.top/getJoke
+
+        // // 1. 创建对象
+        // const xhr = new XMLHttpRequest()
+        // // 2. 初始化
+        // xhr.open('GET', 'https://api.apiopen.top/getJoke')
+        // // 3. 发送请求
+        // xhr.send()
+        // // 4. 绑定事件，处理请求结构
+        // xhr.onreadystatechange = function () {
+        //     // 判断
+        //     if (xhr.readyState === 4) {
+        //         // readyState = 4 表示相应完成
+        //         if (xhr.status >= 200 && xhr.status <= 299) {
+        //             console.log(xhr.response);
+        //         } else {
+        //             console.error(xhr.status);
+        //         }
+
+        //     }
+        // }
+
+        // ************************ 使用promise封装 *****************************************
+        const p = new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest()
+            xhr.open('GET', 'https://api.apiopen.top/getJoke')
+            xhr.send()
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    if (xhr.status >= 200 && xhr.status <= 299) {
+                        resolve(xhr.response)
+                    } else {
+                        reject(xhr.status)
+                    }
+                }
+            }
+        })
+        // 指定成功或失败回调
+        p.then(function (value) {
+            console.log(value);
+        }, function (reason) {
+            console.error(reason);
+        })
+
+    </script>
+</body>
+</html>
