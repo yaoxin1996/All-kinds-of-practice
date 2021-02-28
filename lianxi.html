@@ -7,10 +7,14 @@
 </head>
 <body>
     <script>
-        let set = new Set([1, 2, 3, 5])
-        for (var v of set) {
-            console.log(v);
-        }
-    </script>
+        // 声明一个字符串
+        let str = '<a href="www.baidu.com">百度</a>'
+        // 使用 ?<xxx> 命名
+        const reg = /<a href="(?<url>.*)">(?<text>.*)<\/a>/
+        // 执行
+        const result = reg.exec(str)
+        console.log(result);
+       
+</script>
 </body>
 </html>
