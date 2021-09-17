@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./bitbug_favicon(1).ico" />
+  <title>Document</title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      height: 100%;
+      width: 100%;
+    }
+    .container {
+      height: 100vh;
+      width: 100vw;
+    }
+    .menu {
+      height: 60px;
+      display: flex;
+      justify-content: space-around;
+      border-bottom: 2px solid #f2f2f2;
+      align-items: center;
+    }
+    .btn {
+      width: 80px;
+      height: 35px;
+      border: 1px solid #f2f2f2;
+      border-radius: 10px;
+      text-align: center;
+      line-height: 35px;
+      
+    }
+    #canvas {
+      display: block;
+      position: fixed;
+      top: 62px;
+      left: 0;
+      z-index: 999;
+    }
+    #clear {
+      display: block;
+      position: fixed;
+      top: 62px;
+      left: 0;
+      z-index: 1;
+    }
+    .active {
+      box-shadow: 0 0 5px 5px #666 inset;
+    }
+    .weight {
+      position: relative;
+    }
+    .weight_list {
+      width: 100px;
+      /* height: 160px; */
+      border: 1px solid #999;
+      background-color: #f2f2f2;
+      position: absolute;
+      top: 50px;
+      left: -10px;
+      display: none;
+      z-index: 9999;
+    }
+    ul {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+    }
+    li {
+      list-style: none;
+    }
+    .line {
+      width: 60px;
+      /* height: 1px; */
+      background-color: black;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .line_color {
+      width: 180px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #color {
+      display: inline-block;
+      vertical-align: middle;
+      width: 45px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body onload="huabiBtn[0].onclick()">
+  <div class="container">
+    <div class="menu">
+      <div class="btn huabi">画笔</div>
+      <div class="btn juxing">矩形</div>
+      <div class="btn circle">圆形</div>
+      <div class="btn eraser">
+        橡皮
+        <input type="range" min="10" max="50" step="10" defaultValue="10" name="range" id="range" onchange="changeRange()">
+      </div>
+      <div class="btn weight">
+        线条粗细
+        <div class="weight_list">
+          <ul>
+            <li>
+              <div class="line" style="height: 1px;"></div>
+              <span class="font">1px</span>
+            </li>
+            <li>
+              <div class="line" style="height: 2px;"></div>
+              <span class="font">2px</span>
+            </li>
+            <li>
+              <div class="line" style="height: 3px;"></div>
+              <span class="font">3px</span>
+            </li>
+            <li>
+              <div class="line" style="height: 5px;"></div>
+              <span class="font">5px</span>
+            </li>
+            <li>
+              <div class="line" style="height: 8px;"></div>
+              <span class="font">8px</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="btn line_color">
+        线条颜色
+        <input type="color" name="color" id="color" onchange="changeColor()">
+      </div>
+      <div class="btn download">下载</div>
+    </div>
+    <canvas id="canvas"></canvas>
+    <canvas id="clear"></canvas>
+  </div>
+</body>
+<script>
+  var canvas = document.getElementById('canvas')
+  var ctx = canvas.getContext('2d')
+  var clear = document.getElementById('clear')
+  var clearCtx = clear.getContext('2d')
+  var w = document.body.offsetWidth // 浏览器可视区域宽度
+  var h = document.body.offsetHeight - canvas.offsetTop  // 浏览器可视区域高度 - 菜单栏高度
+  var allBtn = document.querySelectorAll('.btn')
+  var huabiBtn = document.getElementsByClassName('huabi')
+  var juxingBtn = document.getElementsByClassName('juxing')
+  var circleBtn = document.getElementsByClassName('circle')
+  var weightBtn = document.getElementsByClassName('weight')
+  var weightList = document.getElementsByClassName('weight_list')
+  var ul = document.getElementsByTagName('ul')
+  var color = document.getElementById('color')
+  var eraserBtn = document.getElementsByClassName('eraser')
+  var range = document.getElementById('range')
+  var downloadBtn = document.getElementsByClassName('download')
+
+  canvas.setAttribute('width', document.body.offsetWidth)
+  canvas.setAttribute('height', document.body.offsetHeight - canvas.offsetTop)
+  clear.setAttribute('width', document.body.offsetWidth)
+  clear.setAttribute('height', document.body.offsetHeight - canvas.offsetTop)
+  color.value = '#000'
+  range.value = 10
+  range.style.display = 'none'
+
+  var draw = {
+    type: '',
+    isDraw: false,
+    imageData: null,  // 已绘制的内容
+    beginX: 0,
+    beginY: 0,
+    endX: 0,
+    endY: 0,
+    line: 1, // 线条粗细
+    color: '#000',
+    size: 10,
+    screenData: null,  // 截图内容
+    hb: function (e) {
+      ctx.lineWidth = draw.line
+      ctx.strokeStyle = draw.color
+      ctx.lineTo(draw.endX, draw.endY)
+      ctx.stroke()
+      // 也可以用画圆的方式，以endX, endY作为圆心 (每次要清空画布)
+    },
+    jx: function (e) {
+      ctx.clearRect(0, 0, w, h)
+      if (draw.imageData != null) {
+        ctx.putImageData(draw.imageData, 0, 0, 0, 0, w, h)
+      }
+      // 使用 鼠标按下时的位置作为矩形绘制的坐标点
+      let x = draw.beginX
+      let y = draw.beginY
+      let width = draw.endX - draw.beginX
+      let height = draw.endY - draw.beginY
+      ctx.beginPath()
+      ctx.strokeStyle = draw.color
+      ctx.lineWidth = draw.line
+      ctx.rect(x, y, width, height)
+      ctx.stroke()
+      ctx.closePath()
+    },
+    circle: function (e) {
+      ctx.clearRect(0, 0, w, h)
+      if (draw.imageData != null) {
+        // 将图像数据放回画布
+        ctx.putImageData(draw.imageData, 0, 0, 0, 0, w, h)
+      }
+      let width = draw.endX - draw.beginX
+      let height = draw.endY - draw.beginY
+      ctx.strokeStyle = draw.color
+      // Math.sqrt() 计算平方根
+      // Math.pow(x, y) 幂运算 | 表示 x 的 y 次方
+      let r = Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2))
+      ctx.beginPath()
+      ctx.lineWidth = draw.line
+      // 圆形 arc(x, y, r, 0, 2*Math.PI)  其中 x, y是原点，鼠标拖动的距离是半径
+      ctx.arc(draw.beginX, draw.beginY, r, 0, 2*Math.PI)
+      ctx.stroke()
+      ctx.closePath()
+    },
+    eraser: function (e) {
+      ctx.beginPath()
+      ctx.clearRect(draw.endX, draw.endY, draw.size, draw.size)
+      ctx.closePath();
+      clearCtx.beginPath()
+      clearCtx.clearRect(0, 0, w, h)
+      clearCtx.strokeRect(draw.endX, draw.endY, draw.size, draw.size)
+      clearCtx.closePath()
+    },
+    download: function (e) {
+      // 返回一个包含图片展示的 data URI 
+      let url = canvas.toDataURL('png')
+      let a = document.createElement('a')
+      a.setAttribute('href', url)
+      a.setAttribute('download', 'img')
+      a.click()
+    }
+  }
+  draw.hb()
+  
+  // 清除按钮点击样式
+  function clearClass () {
+    allBtn.forEach(item => {
+      item.classList.remove('active')
+    })
+  }
+  // 画笔 点击事件
+  huabiBtn[0].onclick = function () {
+    clearClass()
+    this.classList.add('active')
+    draw.type = 'huabi'
+    weightList[0].style.display = 'none'
+  }
+
+  // 矩形 点击事件
+  juxingBtn[0].onclick = function () {
+    clearClass()
+    this.classList.add('active')
+    draw.type = 'juxing'
+    weightList[0].style.display = 'none'
+  }
+  // 圆形 点击事件
+  circleBtn[0].onclick = function () {
+    clearClass()
+    this.classList.add('active')
+    draw.type = 'circle'
+    weightList[0].style.display = 'none'
+  }
+  // 橡皮 点击事件
+  eraserBtn[0].onclick = function (e) {
+    clearClass()
+    this.classList.add('active')
+    draw.type = 'eraser'
+    range.style.display = range.style.display == 'none' ? range.style.display = 'block' : 'none'
+  }
+  // 线条粗细 点击事件
+  weightBtn[0].onclick = function (e) {
+    clearClass()
+    this.classList.add('active')
+    draw.type = 'weight'
+    weightList[0].style.display = weightList[0].style.display == 'block' ? 'none' : 'block'
+    if (weightList[0].style.display == 'none') {
+      clearClass()
+    }
+  }
+  // 画布点击事件
+  canvas.onclick = function () {
+    if (draw.type == 'weight') {
+      weightList[0].style.display = 'none'
+      weightBtn[0].classList.remove('active')
+    }
+    if (draw.type == 'eraser') {
+      range.style.display = 'none'
+      eraserBtn[0].classList.remove('active')
+    }
+  }
+  // 点击 ul
+  ul[0].onclick = function (e) {
+    console.log(e);
+    // 事件冒泡  给ul绑定点击事件 当点击li时 触发ul的事件
+    let target = e.originalTarget  // 触发事件的元素
+    let clickNode = ''
+    let li = document.querySelectorAll('li')
+    li.forEach(item => {
+      item.style.background = '#f3f3f3'
+    })
+    // 点击的元素如果是 div/span 就找到它的父元素 并获取innerText
+    if (target.nodeName != 'LI') {
+      clickNode = target.parentElement.innerText
+      target.parentElement.style.background = '#fff'
+    } else {
+      clickNode = target.innerText
+      target.style.background = '#fff'
+    }
+    draw.line = Number(clickNode.trim().split('px')[0])
+  }
+  // 点击 线条粗细 下拉菜单
+  weightList[0].onclick = function (e) {
+    e.stopPropagation()  // 阻止冒泡事件
+  }
+  // 选择颜色
+  function changeColor (e) {
+    draw.color = color.value
+  }
+  // 橡皮 滑块点击事件
+  range.onclick = function (e) {
+    e.stopPropagation() // 阻止冒泡事件
+  }
+  // 选择橡皮大小
+  function changeRange (e) {
+    draw.size = range.value
+  }
+  // 下载
+  downloadBtn[0].onclick = function (e) {
+    clearClass()
+    draw.type = 'download'
+    draw.download()
+  }
+
+  canvas.onmousedown = function (e) {
+    draw.isDraw = true
+    draw.beginX = e.pageX
+    draw.beginY = e.pageY - canvas.offsetTop
+    if (draw.type == 'huabi') {
+      ctx.beginPath()
+      ctx.moveTo(draw.beginX, draw.beginY)
+    }
+  }
+
+  canvas.onmouseup = function (e) {
+    draw.isDraw = false
+    // 复制画布数据
+    draw.imageData = ctx.getImageData(0, 0, w, h)
+    if (draw.type == 'huabi') {
+      ctx.closePath()
+    }
+  }
+  // isPointInPath() 方法返回 true，如果指定的点位于当前路径中；否则返回 false
+  canvas.onmousemove = function (e) {
+    draw.endX = e.pageX
+    draw.endY = e.pageY - canvas.offsetTop
+    if (draw.isDraw) {
+      if (draw.type == 'huabi' && draw.isDraw) {
+        draw.hb(e)
+      }
+      if (draw.type == 'juxing') {
+        draw.jx(e)
+      }
+      if (draw.type == 'circle') {
+        draw.circle(e)
+      }
+      if (draw.type == 'eraser' && draw.isDraw) {
+        draw.eraser(e)
+      }
+    }
+  }
+
+</script>
+</html>

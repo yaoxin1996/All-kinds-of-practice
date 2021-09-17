@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    .box {
+      /* display: grid;
+      grid-template-columns: 30% 70%;
+      grid-template-rows: 100% 100%; */
+      display: flex;
+      justify-content: space-between;
+    }
+    .left {
+      width: 30%;
+      height: 100vh;
+      background-color: #f2f2f2;
+    }
+    .item {
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      border-bottom: 1px solid #fff;
+    }
+    .right {
+      width: 70%;
+      height: 100vh;
+      background-color: #f9f9f9;
+    }
+    ul {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+    }
+    li {
+      height: 30px;
+      line-height: 30px;
+      list-style: none;
+      display: inline-block;
+      text-align: center;
+      border-right: 1px solid #fff;
+    }
+    @media screen and (max-width: 360px) {
+      html {
+        font-size: 15px;
+      }
+      ul {
+        grid-template-columns: 1fr;
+        font-size: 1rem;
+      }
+      .left {
+        display: none;
+      }
+      .right {
+        width: 100%;
+      }
+    }
+    @media screen and (max-width: 960px) {
+      html {
+        font-size: 20px;
+      }
+      ul {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <div class="left">
+      <div class="item">1</div>
+      <div class="item">2</div>
+      <div class="item">3</div>
+      <div class="item">4</div>
+      <div class="item">5</div>
+    </div>
+    <div class="right">
+      <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+      </ul>
+      <picture>
+        <!-- <source media="(min-width: 320px)" srcset="img/minpic.png"> -->
+        <source media="(max-width: 320px)" srcset="img/img1.jpg">
+        <source media="(max-width: 640px)" srcset="img/img2.jpg">
+        <img src="img/img3.jpg" width="500" height="500" alt="" srcset="">
+      </picture>
+    </div>
+  </div>
+</body>
+</html>
