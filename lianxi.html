@@ -1,15 +1,43 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript" src="qrcode.js"></script>
+	</head>
+	<body>
+		<div id='qrcode' style="display: none;"></div>
 
-  <script>
-    
-  </script>
-</body>
+		<canvas id="canvas" width="400px" height="300px" style="border:1px solid #c3c3c3;">
+		</canvas>
+
+		<script>
+			var canvas = document.getElementById("canvas");
+			var ctx = canvas.getContext("2d");
+			createQrcode('www.163.com', 100, 100);
+			
+			//将canvas转图像
+			// function convertCanvasToImage(canvas) {
+			// 	var image = new Image();
+			// 	image.src = canvas.toDataURL("image/png");
+			// 	return image;
+			// }
+
+			function createQrcode(txt, x, y) {
+				var qrcode = new QRCode('qrcode', {
+					width: 100,
+					height: 100,
+				})
+				// qrcode.makeCode(txt);
+				//获取二维码canvas
+				var qrcanvas = document.getElementsByTagName('canvas')[0];
+        var image = new Image();
+				image.src = qrcanvas.toDataURL("image/png");
+				image.onload = function() {
+					ctx.drawImage(image, x, y, 100, 100);
+				};
+			}
+		</script>
+	</body>
 </html>
+

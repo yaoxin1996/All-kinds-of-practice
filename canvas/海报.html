@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      height: 100vh;
+      width: 100vw;
+      padding: 0;
+      margin: 0;
+    }
+    #canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+    <div style="width: 80px;height:80px;display: none;" id="qr"></div>
+  </image>
+  <script src="../qrcode.js"></script>
+  <script>
+    var canvas = document.getElementById('canvas')
+    var ctx = canvas.getContext('2d')
+    var width = canvas.clientWidth
+    var height = canvas.clientHeight
+    canvas.setAttribute('width', width)
+    canvas.setAttribute('height', height)
+    // 生成二维码
+    var qrcode = new QRCode("qr", {
+      text: "http://www.runoob.com",
+      width: 128,
+      height: 128,
+      colorDark : "#000000",
+      colorLight : "#ffffff",
+      correctLevel : QRCode.CorrectLevel.H
+    });
+    
+    // 获取canvas列表
+    var code = document.querySelectorAll('canvas')[1]
+    // 背景图
+    var img = new Image()
+    img.src = '../img/poster.jpg'
+    // 背景图 （载入后再绘制）
+    img.onload = function () {
+      ctx.drawImage(img, 0, 0, width, height)
+      // 背景图绘制好之后 再 绘制二维码
+      var img1 = new Image()
+      img1.src = code.toDataURL("image/jpg")
+      img1.onload = function () {
+        ctx.drawImage(img1, (width - 100) / 2, height - 300, 100, 100)
+      }
+
+      // 绘制头像
+      ctx.arc(width / 2, 150, 40, 0, 2*Math.PI)
+      ctx.stroke()
+      var img2 = new Image()
+      img2.src = '../img/img2.jpg'
+      img2.onload = function () {
+        ctx.drawImage(img2, (width - 80) / 2, (150 - 40), 80, 80)
+      }
+      // 切成圆形
+      ctx.clip()
+      
+      // 绘制文字
+      ctx.getContext('1212')
+    }
+    
+    
+  </script>
+</body>
+</html>
