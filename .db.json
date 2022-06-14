@@ -1,0 +1,29 @@
+{
+  "posts": [
+    {
+      "title": "平凡的世界",
+      "author": "路遥",
+      "id": 1
+    },
+    {
+      "title": "月光落在左手边",
+      "author": "余秀华",
+      "id": 4
+    },
+    {
+      "title": "人间滋味",
+      "author": "汪曾祺",
+      "id": 5
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}

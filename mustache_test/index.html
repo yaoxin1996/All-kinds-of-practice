@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- arr: [
+     {
+       "name": '小红', "age": 14, "hobby": ['跑步', '跳绳']
+     }, {
+       "name": '袭人', "age": 18, "hobby": ['女红', '刺绣']
+     }, {
+       "name": '晴雯', "age": 16, "hobby": ['撕扇']
+     }
+   ] -->
+<script src="./mustache.js"></script>
+<div id="contianer"></div>
+<script type="text/template" id="mytemplate">
+  <div>
+    <h1>{{thing}}的作者是{{author}}</h1>
+  </div>
+</script>
+<script>
+  let template = document.getElementById('mytemplate').innerHTML
+  let data = {
+    thing: '《平凡的世界》',
+    author: '路遥'
+  }
+  function render (template, data) {
+    template = template.replace(/\{\{(\w+)\}\}/g, function (findStr, key) {
+      return data[key]
+    })
+    let contianer = document.getElementById('contianer')
+    contianer.innerHTML = template
+  }
+  render(template, data)
+</script>
+</body>
+</html>

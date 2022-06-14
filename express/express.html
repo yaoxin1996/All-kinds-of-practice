@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    div {
+      width: 200px;
+      height: 100px;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+  <button>点击发送请求</button>
+  <button>取消请求</button>
+  <div></div>
+  <script>
+    let btn = document.getElementsByTagName('button')[0];
+    let cancel = document.getElementsByTagName('button')[1]
+    let div = document.getElementsByTagName('div')[0];
+    let xhr = null
+    btn.onclick = function () {
+      // 创建对象
+      let xhr = new XMLHttpRequest()
+      // 实例化
+      xhr.open('GET', 'http://127.0.0.1:3000/get')
+      // 发送请求
+      xhr.send()
+      // 创建对象 接收服务端返回的数据
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+          // 0 创建对象但未实例化
+          // 1 实例化 调用open方法
+          // 2 发送请求 未返回参数
+          // 3 开始接收数据 但只接收到部分数据
+          // 4 完成响应
+          if (xhr.status >= 200 && xhr.status < 300) {
+            console.log(xhr.response);
+          }
+        }
+      }
+    }
+    cancel.onclick = function () {
+      xhr.abort()
+    }
+    
+  </script>
+</body>
+</html> 

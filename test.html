@@ -5,10 +5,40 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.3.2.js"></script>
 </head>
 <body>
-  <div style="height: 3500px;">
-    <p id="Luofei" style="margin-top: 2000px;">罗飞</p>
-  </div>
+  <h1>This is WebView</h1>
+  <script>
+    let h1 = document.getElementsByTagName('h1')[0]
+    window.onload = function () {
+      console.log(getUrlParam('isPay'));
+    }
+    h1.onclick = function () {
+      
+      wx.miniProgram.redirectTo({
+        url: '/pages/webview/webview?isOk=true'
+      })
+    }
+    let obj1 = { x: 200 }
+    let obj2 = { y: 300 }
+    Object.defineProperty(obj2, 'x', {
+      get () {
+        return obj1.x
+      },
+      set (value) {
+        obj1.x = value
+      }
+    })
+
+    Object.defineProperty(obj1, 'y', {
+      get () {
+        return obj2.y
+      },
+      set (value) {
+        obj2.y = value
+      }
+    })
+  </script>
 </body>
 </html>

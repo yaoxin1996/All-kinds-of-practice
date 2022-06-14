@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="referrer" content="no-referrer" />
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <!-- <link rel="shortcut icon" href="./bitbug_favicon(1).ico" /> -->
+  <title>Document</title>
+  <style>
+  
+  </style>
+</head>
+<style>
+</style>
+<body>
+  <input type="text">
+</body>
+<script>
+  let input = document.getElementsByTagName('input')[0]
+  // 1. 防抖 只执行最后一次
+  // input.oninput = debouces(function () {
+  //   console.log(this.value);
+  // }, 200)
+  // function debouces (fn, delay) {
+  //   let t
+  //   return function () {
+  //     if (t != null) {
+  //       clearTimeout(t)
+  //     }
+  //     t = setTimeout(() => {
+  //       fn.call(this)
+  //     }, delay)
+  //   }
+  // }
+
+  
+  // 2. 节流 减少请求次数
+  // let flag = true
+  // input.oninput = function () {
+  //   if (flag) {
+  //     setTimeout(() => {
+  //       console.log(this.value);
+  //       flag = true
+  //     }, 500)
+  //   }
+  //   flag = false
+  // }
+  
+  // input.oninput = thro (function () {
+  //   console.log(this.value);
+  // }, 2000)
+  // function thro (fn, delay) {
+  //   let t
+  //   return function () {
+  //     if (!t) {
+  //       t = setTimeout(() => {
+  //         fn.call(this)
+  //         t = null
+  //       }, delay)
+  //     }
+  //   }
+  // }
+
+
+  // function thro (fn, delay) {
+  //   let t
+  //   return function () {
+  //     if (!t) {
+  //       t = setTimeout(() => {
+  //         fn.call(this)
+  //         t = null
+  //       }, delay)
+  //     }
+  //   }
+  // }
+
+
+  // 3. 递归查找数据
+  // var obj = [{
+  //   id: 1,
+  //   name: '家电',
+  //   product: [{
+  //     id: 3,
+  //     name: '洗衣机',
+  //     product: [{
+  //       id: 5,
+  //       name: '海尔'
+  //     }]
+  //   }]
+  // }, {
+  //   id: 2,
+  //   name: '手机',
+  //   product: [{
+  //     id: 4,
+  //     name: '小米',
+  //     product: [{
+  //       id: 6,
+  //       name: '小米10',
+  //       product: [{
+  //         id: 8,
+  //         name: '耳机'
+  //       }]
+  //     }]
+  //   }]
+  // }]
+
+  // let res = {}
+  // function fun (obj, id) {
+  //   obj.forEach(item => {
+  //     if (item.id == id) {
+  //       res = item
+  //     } else if (item.product && item.product.length > 0) {
+  //       fun(item.product, id)
+  //     }
+  //   });
+  // }
+  // fun(obj, 8)
+  // console.log(res);
+  
+  // 4. 递归深拷贝
+  // var copyObj = {
+  //   name: '张三',
+  //   detail: {
+  //     age: 16,
+  //     secret: {
+  //       hobit: 'sleep'
+  //     }
+  //   },
+  //   arr: [1, 3, 5, 7, 9]
+  // }
+
+  // function fun (newVal, oldVal) {
+  //   for (let item in oldVal) {
+  //     if (oldVal[item] instanceof Array) {
+  //       newVal[item] = []
+  //       fun(newVal[item], copyObj[item])
+  //     } else if (oldVal[item] instanceof Object) {
+  //       newVal[item] = {}
+  //       fun(newVal[item], oldVal[item])
+  //     } else {
+  //       newVal[item] = oldVal[item]
+  //     }
+  //   }
+  // }
+  // let newVal = {}
+  // fun(newVal, copyObj)
+  // copyObj.detail.secret.book = 'poem'
+  // console.log(newVal);
+  // console.log(copyObj);
+
+  // 5. 退出forEach
+  // let arr = [1, 2, 5, 6, 8, 10]
+  // try {
+  //   arr.forEach(item => {
+  //     console.log(item);
+  //     if (item == 5) {
+  //       throw Error(item)
+  //     }
+  //   })    
+  // } catch (error) {
+  //   console.log(error);
+  // }
+
+  // 6. 获取地址中的参数
+  // let url = location.search.substr(1)
+  // let arr = url.split('&')
+  // let search = {}
+  // arr.forEach(item => {
+  //   let val = item.split('=')
+  //   search[val[0]] = val[1]
+  // })
+  // console.log(search);
+
+  // 7. 通过a.b.c找到对应属性
+  // let obj = {
+  //   a: {
+  //     b: {
+  //       c: 100
+  //     }
+  //   }
+  // }
+  // function findObj (obj, str) {
+  //   let arr = str.split('.')
+  //   let tem = obj
+  //   arr.forEach(item => {
+  //     tem = tem[item]
+  //   })
+  //   return tem
+  // }
+  // let res = findObj(obj, 'a.b.c')
+  // console.log(res);
+</script>
+</html>

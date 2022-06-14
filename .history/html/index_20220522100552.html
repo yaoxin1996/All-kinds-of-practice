@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  .box {
+
+  }
+  .inner {
+    width: 200px;
+    height: 200px;
+    background: #ccc;
+    position: relative;
+  }
+  .inner::after {
+    content: '';
+    width: 10px;
+    height: 500px;
+    transform: rotate(45deg);
+    background-color: #fff;
+    position: absolute;
+    top: -80px;
+    left: -180px;
+  }
+  .box:hover .inner::after{
+    left: 300px;
+  }
+
+</style>
+<body>
+  <div class="box">
+    <div class="inner"></div>
+  </div>
+</body>
+</html>

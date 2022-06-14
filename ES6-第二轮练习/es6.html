@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  
+</style>
+<body>
+  <script>
+    'use strict'
+    var greeting = 'My name is ${name}, age ${age}, I am a ${job.jobName}';
+      var employee = {
+          name: 'XiaoMing',
+          age: 11,
+          job: {
+              jobName: 'designer',
+              jobLevel: 'senior'
+          } 
+      };
+      
+      console.log(result);   
+      
+      String.prototype.render = function (obj) {
+        // 先把obj中的值解构出来
+        eval(`var {${Object.keys(obj).join(',')}} = obj`)
+        // 这里的this是greeting字符串
+        // 需要先把字符串用模板字符串包裹起来，这样才能够让this读取上边解构的对象属性
+        return eval('`' + this + '`')
+      }
+      
+      var result = greeting.render(employee);
+  </script>
+</body>
+</html>

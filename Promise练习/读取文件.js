@@ -1,26 +1,30 @@
-// 1. 引入fs
 const fs = require('fs')
+const util = require('util')
+// util.promisify可以把api转换成promise类型的函数
+const mineReadFile = util.promisify(fs.readFile)
 
-// 2. 调用方法获取文件
-// fs.readFile('./resource/教案.md', (err, data) => {
-//     // 如果有错误 则抛出
-//     if (err) throw error
-//     // 没错 输出内容
-//     console.log(data.toString());
-// })
-
-// 3. 使用promise封装
-const p = new Promise(function (resolve, reject) {
-    let data = fs.readFile('./resource/教案.md', (err, data) => {
-        // 失败
-        if (err) reject(err)
-        // 成功
-        resolve(data)
-        
+// 回调函数方式
+fs.readFile('./resource/出师表.md', (err, data1) => {
+  if (err) throw err
+  fs.readFile('./resource/教案.md', (err, data2) => {
+    if (err) throw err
+    fs.readFile('./resource/沁园春雪.md', (err, data3) => {
+      if (err) throw err
+      console.log(data1 + data2 + data3);
     })
+  })
 })
-p.then(function (value) {
-    console.log(value.toString());
-}, function (reason) {
-    console.log('读取失败')
-})
+
+// async await方式
+async function main () {
+  try {
+    let data1 = await mineReadFile('./resource/出师表.md')
+    let data2 = await mineReadFile('./resource/教案.md')
+    let data3 = await mineReadFile('./resource/园春雪.md')
+    console.log(data1+ data2 + data3);
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+main()
